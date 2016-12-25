@@ -1,4 +1,4 @@
-package hydra.vo;
+package hydra.vo.abs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import hydra.tool.MailboxType;
 import hydra.vo.inter.Account;
 
-public class MailboxAccount implements Account{
+public abstract class MailboxAccount implements Account{
 	private MailboxType mailboxtype;
 	private String subdir;
 	private String username;

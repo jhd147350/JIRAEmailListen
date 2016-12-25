@@ -1,4 +1,4 @@
-package hydra.vo;
+package hydra.vo.imp;
 
 import hydra.vo.inter.Account;
 

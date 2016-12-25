@@ -1,8 +1,8 @@
 package hydra.importmailmessage.imp;
 
 import hydra.importmailmessage.abs.ImportMailMessage;
-import hydra.vo.JIRAAccount;
-import hydra.vo.MailMessage;
+import hydra.vo.abs.MailMessage;
+import hydra.vo.imp.JIRAAccount;
 import hydra.vo.inter.Account;
 
 public class ImportMessageToJIRA extends ImportMailMessage{
@@ -16,7 +16,7 @@ public class ImportMessageToJIRA extends ImportMailMessage{
 	protected void import_exe(Account account, MailMessage mailMessage) {
 		// TODO Auto-generated method stub
 		JIRAAccount jiraaccount=(JIRAAccount)account;
-		System.out.println("我们使用这个cookie："+getSession(account)+"登录"+jiraaccount.getUsername()+"的账号并创建了task");
+		System.out.println("我们使用这个cookie："+getSession(account)+"登录"+jiraaccount.getUsername()+"的账号并创建了task/n"+mailMessage.getBody());
 	}
 
 }

@@ -4,8 +4,8 @@ import java.util.List;
 
 import hydra.mailbox.imp.OutlookEmailboxListen;
 import hydra.tool.PropertiesHelper;
-import hydra.vo.MailMessage;
-import hydra.vo.OutlookMailboxAccount;
+import hydra.vo.abs.MailMessage;
+import hydra.vo.imp.OutlookMailboxAccount;
 
 public class Test01 {
 

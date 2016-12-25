@@ -8,11 +8,12 @@ import javax.swing.JOptionPane;
 import hydra.mailbox.abs.AbstractMailboxListen;
 import hydra.mailbox.inter.MailboxListen;
 import hydra.tool.MailboxType;
-import hydra.vo.MailMessage;
-import hydra.vo.MailboxAccount;
-import hydra.vo.OutlookMailboxAccount;
+import hydra.vo.abs.MailMessage;
+import hydra.vo.abs.MailboxAccount;
+import hydra.vo.imp.OutlookMailboxAccount;
 import microsoft.exchange.webservices.data.core.enumeration.property.WellKnownFolderName;
 import microsoft.exchange.webservices.data.core.enumeration.service.ConflictResolutionMode;
+import microsoft.exchange.webservices.data.core.exception.service.local.ServiceLocalException;
 import microsoft.exchange.webservices.data.core.service.folder.Folder;
 import microsoft.exchange.webservices.data.core.service.item.EmailMessage;
 import microsoft.exchange.webservices.data.core.service.item.Item;
@@ -55,7 +56,7 @@ public class OutlookEmailboxListen extends AbstractMailboxListen {
 		}
 		// 准备进行未读邮件查取
 		// 最多查询到的数量
-		view = new ItemView(10);
+		view = new ItemView(1);
 		// 过滤未读邮件
 		sf = new SearchFilter.IsEqualTo(EmailMessageSchema.IsRead, false);
 	}
@@ -77,7 +78,7 @@ public class OutlookEmailboxListen extends AbstractMailboxListen {
 				//System.out.println("Subject:" + message.getSubject()); //
 				MessageBody mb = message.getBody(); //
 				//System.out.println("body-->" + mb.toString());
-				MailMessage mm=new MailMessage();
+				MailMessage mm=new MailMessage(null, null, null, null, null, null, null);
 				//mm.setAddresser(message.);
 				mm.setBody(mb.toString());
 				EmailAddressCollection ccRecipients = message.getCcRecipients();
@@ -108,13 +109,46 @@ public class OutlookEmailboxListen extends AbstractMailboxListen {
 	@Override
 	protected MailMessage get_Email(MailboxAccount account) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MailMessage getEmail(MailboxAccount account) {
-		// TODO Auto-generated method stub
-		return super.getEmail(account);
+		initComponent((OutlookMailboxAccount) account);
+		MailMessage mm=new MailMessage(null, null, null, null, null, null, null);
+		try {
+		// 查询返回结果
+		findResults = ((OutlookMailboxAccount)account).getEs().findItems(inbox.getId(), sf, view);
+		// get all unread numbers.
+		// unReadNum = findResults.getTotalCount();
+		// System.out.println("" + unReadNum);
+			for (Item item : findResults.getItems()) {
+				EmailMessage message;
+				
+				message = EmailMessage.bind(((OutlookMailboxAccount)account).getEs(), item.getId());
+				//System.out.print(message.getSender());
+				//System.out.println("Subject:" + message.getSubject()); //
+				MessageBody mb = message.getBody(); //
+				//System.out.println("body-->" + mb.toString());
+				//mm.setAddresser(message.);
+				mm.setBody(mb.toString());
+				EmailAddressCollection ccRecipients = message.getCcRecipients();
+				List<EmailAddress> list = ccRecipients.getItems();
+				String[] cc=new String[list.size()];
+				for(int i=0;i<list.size();i++){
+					cc[i]=list.get(i).getAddress();
+					//address.getAddress();
+				}
+				mm.setCc(cc);
+				mm.setSubject(message.getSubject());
+				// 将邮件置为已读 // 
+				message.setIsRead(true); // 更新到服务器上 //
+				message.update(ConflictResolutionMode.AlwaysOverwrite);
+					
+			}
+		} catch (ServiceLocalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 	
+		return mm;
 	}
 
 }

@@ -1,9 +1,12 @@
 package hydra.mailbox.abs;
 
+import java.util.List;
+
 import hydra.mailbox.inter.MailboxListen;
 import hydra.tool.MailboxType;
-import hydra.vo.MailMessage;
-import hydra.vo.MailboxAccount;
+import hydra.vo.abs.MailMessage;
+import hydra.vo.abs.MailboxAccount;
+import hydra.vo.inter.Account;
 
 public abstract class AbstractMailboxListen implements MailboxListen{
 	protected MailboxType mailboxType;
@@ -21,6 +24,44 @@ public abstract class AbstractMailboxListen implements MailboxListen{
 			System.out.println("没有适合的监听器监听此邮箱账户");
 			return null;
 		}
+	}
+	public MailMessage mailMessage=null;
+	
+	public void getEmail(List<MailboxAccount> account) {
+		final AbstractMailboxListen abstractMailboxListen=this;
+		final List<MailboxAccount> accounts =account;
+		final int L =accounts.size();
+		Runnable getemail = new Runnable() {
+			public void run() {
+				synchronized (abstractMailboxListen) {
+					int j=0;
+					while(j<10){
+						System.out.println("第"+j+"次监听");
+						j++;
+						for(int i=0;i<L;i++){
+							if(accounts.get(i).getMailboxtype()==mailboxType){
+								mailMessage= get_Email(accounts.get(i));
+								abstractMailboxListen.notify();
+								try {
+									abstractMailboxListen.wait();
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}							
+							}else if(nextmailboxListen!=null){
+								mailMessage=nextmailboxListen.getEmail(accounts.get(i));
+							}else{
+								System.out.println("没有适合的监听器监听此邮箱账户");
+								System.exit(1);
+							}
+						}
+					}
+				}
+			}
+		};
+		
+		Thread thread=new Thread(getemail);
+		thread.start();
 	}
 	protected abstract MailMessage get_Email(MailboxAccount account);
 }
