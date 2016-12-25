@@ -1,5 +1,7 @@
 package hydra.mailbox.imp;
 
+import java.util.List;
+
 import hydra.mailbox.abs.AbstractMailboxListen;
 import hydra.mailbox.inter.MailboxListen;
 import hydra.tool.MailboxType;
@@ -19,6 +21,16 @@ public class QQEmailboxListen extends AbstractMailboxListen {
 		// TODO Auto-generated method stub
 		System.out.println("我们登录"+account.getUsername()+"的账号并获取了新的邮件");
 		return new MailMessage(null, null, null, null, null, null, null);
+	}
+
+	public List<MailMessage> getUnReadMails(MailboxAccount account) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public MailMessage getEmail(MailboxAccount account) {
+		// TODO Auto-generated method stub
+		return super.getEmail(account);
 	}
 
 }
