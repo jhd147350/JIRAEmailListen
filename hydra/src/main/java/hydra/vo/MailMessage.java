@@ -13,6 +13,7 @@ public class MailMessage implements Message{
 	private String body;
 	private Date date;
 	private MailboxType mailboxtype;
+	public MailMessage(){}
 	public MailMessage(String subject, String addresser, String[] receiver, String[] cc, String body, Date date,
 			MailboxType mailboxtype) {
 		super();

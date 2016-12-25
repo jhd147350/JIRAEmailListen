@@ -1,5 +1,8 @@
 package hydra.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hydra.tool.MailboxType;
 import hydra.vo.inter.Account;
 
