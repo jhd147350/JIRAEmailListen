@@ -1,11 +1,8 @@
 package hydra.mailbox.inter;
 
-import java.util.List;
-
-import hydra.vo.MailMessage;
-import hydra.vo.MailboxAccount;
+import hydra.vo.abs.MailMessage;
+import hydra.vo.abs.MailboxAccount;
 
 public interface MailboxListen {
 	public MailMessage getEmail(MailboxAccount account);
-	public List<MailMessage> getUnReadMails(MailboxAccount account);
 }

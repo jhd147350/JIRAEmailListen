@@ -6,10 +6,11 @@ import java.util.List;
 import hydra.importmailmessage.imp.ImportMessageToJIRA;
 import hydra.importmessage.inter.ImportMessage;
 import hydra.mailbox.abs.AbstractMailboxListen;
-import hydra.mailbox.imp.QQEmailboxListen;
+import hydra.mailbox.imp.OutlookEmailboxListen;
 import hydra.tool.MailboxType;
-import hydra.vo.JIRAAccount;
-import hydra.vo.MailboxAccount;
+import hydra.vo.abs.MailboxAccount;
+import hydra.vo.imp.JIRAAccount;
+import hydra.vo.imp.OutlookMailboxAccount;
 import hydra.vo.inter.Account;
 public class Client {
 	public static void main(String args[]){
@@ -23,10 +24,9 @@ public class Client {
 	}
 	public static void test1(){
 		List<MailboxAccount> accounts=new ArrayList<MailboxAccount>();
-		accounts.add(new MailboxAccount(MailboxType.QQ, null, "张三", "dd"));
-		accounts.add(new MailboxAccount(MailboxType.QQ, null, "李四", "dd"));
-		accounts.add(new MailboxAccount(MailboxType.QQ, null, "王五", "dd"));
-		AbstractMailboxListen listen =new QQEmailboxListen(null);
+		accounts.add(new OutlookMailboxAccount(MailboxType.OUTLOOK, null, "duan.xuechao@21vianet.com", "dD.5885808"));
+		System.out.println(accounts.get(0).getUsername());
+		AbstractMailboxListen listen =new OutlookEmailboxListen(null);
 		Account jiraaccount=new JIRAAccount("张三", "ddd");
 		ImportMessage mailtojira=new ImportMessageToJIRA();
 		listen.getEmail(accounts);
@@ -42,7 +42,6 @@ public class Client {
 					mailtojira.execute(jiraaccount, listen.mailMessage);
 					listen.notify();
 				}
-				
 			}
 		}
 	}

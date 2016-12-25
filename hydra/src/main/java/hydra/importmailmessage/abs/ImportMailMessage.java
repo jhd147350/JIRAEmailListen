@@ -1,7 +1,7 @@
 package hydra.importmailmessage.abs;
 
 import hydra.importmessage.inter.ImportMessage;
-import hydra.vo.MailMessage;
+import hydra.vo.abs.MailMessage;
 import hydra.vo.inter.Account;
 
 

@@ -4,8 +4,8 @@ import java.util.List;
 
 import hydra.mailbox.inter.MailboxListen;
 import hydra.tool.MailboxType;
-import hydra.vo.MailMessage;
-import hydra.vo.MailboxAccount;
+import hydra.vo.abs.MailMessage;
+import hydra.vo.abs.MailboxAccount;
 import hydra.vo.inter.Account;
 
 public abstract class AbstractMailboxListen implements MailboxListen{

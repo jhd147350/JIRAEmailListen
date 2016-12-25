@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import hydra.vo.OutlookMailboxAccount;
+import hydra.vo.imp.OutlookMailboxAccount;
 
 public class PropertiesHelper {
 
