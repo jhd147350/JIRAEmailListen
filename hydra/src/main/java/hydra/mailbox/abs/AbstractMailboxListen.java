@@ -6,7 +6,6 @@ import hydra.mailbox.inter.MailboxListen;
 import hydra.tool.MailboxType;
 import hydra.vo.abs.MailMessage;
 import hydra.vo.abs.MailboxAccount;
-import hydra.vo.inter.Account;
 
 public abstract class AbstractMailboxListen implements MailboxListen{
 	protected MailboxType mailboxType;
@@ -27,7 +26,8 @@ public abstract class AbstractMailboxListen implements MailboxListen{
 	}
 	public MailMessage mailMessage=null;
 	
-	public void getEmail(List<MailboxAccount> account) {
+	//多线程获取邮件
+	/*public void getEmail(List<MailboxAccount> account) {
 		final AbstractMailboxListen abstractMailboxListen=this;
 		final List<MailboxAccount> accounts =account;
 		final int L =accounts.size();
@@ -62,6 +62,6 @@ public abstract class AbstractMailboxListen implements MailboxListen{
 		
 		Thread thread=new Thread(getemail);
 		thread.start();
-	}
+	}*/
 	protected abstract MailMessage get_Email(MailboxAccount account);
 }

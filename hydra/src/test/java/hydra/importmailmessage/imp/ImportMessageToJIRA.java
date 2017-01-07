@@ -1,14 +1,14 @@
 package hydra.importmailmessage.imp;
 
-import hydra.importmailmessage.abs.ImportMailMessage;
+import hydra.importmessage.abs.AbstractImportMailMessage;
 import hydra.vo.abs.MailMessage;
 import hydra.vo.imp.JIRAAccount;
 import hydra.vo.inter.Account;
 
-public class ImportMessageToJIRA extends ImportMailMessage{
+public class ImportMessageToJIRA extends AbstractImportMailMessage{
 
 	@Override
-	public String getSession(Account account) {
+	protected String getSession(Account account) {
 		// TODO Auto-generated method stub
 		return "abc";
 	}

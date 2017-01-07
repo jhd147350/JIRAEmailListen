@@ -1,11 +1,11 @@
-package hydra.importmailmessage.abs;
+package hydra.importmessage.abs;
 
 import hydra.importmessage.inter.ImportMessage;
 import hydra.vo.abs.MailMessage;
 import hydra.vo.inter.Account;
 
 
-public abstract class ImportMailMessage implements ImportMessage {
+public abstract class AbstractImportMailMessage implements ImportMessage {
 	
 	public void execute(Account account, hydra.vo.inter.Message message) {
 		import_exe(account,(MailMessage)message);

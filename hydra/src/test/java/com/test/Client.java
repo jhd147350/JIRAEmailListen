@@ -20,9 +20,14 @@ public class Client {
 		Message emailmessage=emailboxListen.getEmail((MailboxAccount)emailaccount);
 		ImportMessage mailtojira=new ImportMessageToJIRA();
 		mailtojira.execute(jiraaccount, emailmessage);*/
-		test1();
+		
 	}
-	public static void test1(){
+	public static void test2(){
+		/*Account emMailboxAccount = new MailboxAccount( MailboxType.OUTLOOK,)
+		};*/
+	}
+	//邮件监听建立子线程
+	/*public static void test1(){
 		List<MailboxAccount> accounts=new ArrayList<MailboxAccount>();
 		accounts.add(new OutlookMailboxAccount(MailboxType.OUTLOOK, null, "duan.xuechao@21vianet.com", "dD.5885808"));
 		System.out.println(accounts.get(0).getUsername());
@@ -44,5 +49,6 @@ public class Client {
 				}
 			}
 		}
-	}
+
+	}*/
 }
