@@ -15,7 +15,7 @@ import hydra.vo.imp.OutlookMailboxAccount;
 public class PropertiesHelper {
 
 
-	public static List<OutlookMailboxAccount> readProperties() {
+	/*public static List<OutlookMailboxAccount> readProperties() {
 
 		// HashMap<String, String> m=new HashMap<String,String>();
 		List<OutlookMailboxAccount> users = new ArrayList<OutlookMailboxAccount>();
@@ -40,9 +40,9 @@ public class PropertiesHelper {
 				//users.add(new OutlookMailboxAccount(o.toString(), p.get(o).toString()));
 				users.add(account);
 				// m.put(o.toString(), p.get(o).toString());
-				/*
+				
 				 * System.out.println(o); System.out.println(p.get(o));
-				 */
+				 
 			}
 			// p.get(array)
 			// p.getProperty(keySet.)
@@ -53,7 +53,7 @@ public class PropertiesHelper {
 		//System.out.println(users.toString());
 		return users;
 	}
-
+*/
 	
 	//if password is null then remove the email from list, otherwise add a new email to the list
 	public static void writeProperties(String email, String password) {
